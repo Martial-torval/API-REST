@@ -1,26 +1,26 @@
 const express = require("express"); // Import express
-const typeorm = require("typeorm"); // Import typeORM
-
-const Wilder = require("./entity/Wilder");
+const dataSource = require("./utils").dataSource;
+const wilderController = require("./controller/wilder");
 
 const app = express(); // Initialize express
 
-const dataSource = new typeorm.DataSource({
-  type: "sqlite",
-  database: "./wildersdb.sqlite",
-  synchronize: true, // true value is Only in dev environnement
-  entities: [require("./entity/Wilder")],
-});
+app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("hello world");
-});
+// app.get("/", (req, res) => {
+//   res.send("hello world");
+// });
+
+// Routes
+
+app.post("/api/wilder", wilderController.create);
+app.get("/api/wilder", wilderController.read);
+app.put("/api/wilder/:id", wilderController.update);
+app.delete("/api/wilder/:id", wilderController.delete);
 
 // Start server
 
 const start = async () => {
   await dataSource.initialize();
-  dataSource.getRepository(Wilder).save({ name: "Martial Torval" });
   app.listen("3000", () => console.log("Server started on 3000"));
 };
 
