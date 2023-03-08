@@ -23,6 +23,12 @@ app.get("/api/skill", skillController.read);
 app.put("/api/skill/:id", skillController.update);
 app.delete("/api/skill/:id", skillController.delete);
 
+// http://localhost:3000/api/wilder/123/skill/123/add
+app.post(
+  "/api/wilder/:wilderId/skill/:skillId/add",
+  wilderController.addWilderSkill
+);
+
 // Start server
 
 const start = async () => {

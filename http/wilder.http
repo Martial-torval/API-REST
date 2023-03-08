@@ -2,7 +2,7 @@ POST http://localhost:3000/api/wilder
 Content-Type: application/json
 
 {
-    "name": "Jules Floren"
+    "name": "Martial Torval"
 }
 
 ###
@@ -12,7 +12,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3000/api/wilder/1
+PUT http://localhost:3000/api/wilder/1/skill/add
 Content-Type: application/json
 
 {
@@ -21,6 +21,12 @@ Content-Type: application/json
 
 ### 
 
-DELETE http://localhost:3000/api/wilder/13
+DELETE http://localhost:3000/api/wilder/1
 Content-Type: application/json
+
+###
+
+POST http://localhost:3000/api/wilder/2/skill/1/add
+Content-Type: application/json
+
 

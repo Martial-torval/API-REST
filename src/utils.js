@@ -6,5 +6,6 @@ module.exports = {
     database: "./wildersdb.sqlite",
     synchronize: true, // true value is Only in dev environnement
     entities: [require("./entity/Wilder"), require("./entity/Skill")],
+    logging: ["error"], // Display SQL request in terminal while sending request
   }),
 };
