@@ -5,6 +5,6 @@ module.exports = {
     type: "sqlite",
     database: "./wildersdb.sqlite",
     synchronize: true, // true value is Only in dev environnement
-    entities: [require("./entity/Wilder")],
+    entities: [require("./entity/Wilder"), require("./entity/Skill")],
   }),
 };

@@ -3,51 +3,46 @@ const WilderEntity = require("../entity/Wilder");
 
 module.exports = {
   //Methode Create
-  create: (req, res) => {
-    dataSource
-      .getRepository(WilderEntity)
-      .save(req.body)
-      .then(() => {
-        res.send("Created Wilder");
-      })
-      .catch(() => {
-        res.send("Error lors de la création du Wilder");
-      });
-    console.log(req.body);
+  create: async (req, res) => {
+    try {
+      const newWilder = await dataSource
+        .getRepository(WilderEntity)
+        .save(req.body);
+      res.send("Created Wilder");
+    } catch (error) {
+      res.send("Error while creating a wilder");
+    }
   },
   // Methode read
-  read: (req, res) => {
-    dataSource
-      .getRepository(WilderEntity)
-      .query("SELECT * FROM wilder") // SQL
-      // .find()
-      .then((data) => {
-        res.send(data);
-      })
-      .catch(() => {
-        res.send("Une erreur lors de la lecture de la table Wilder");
-      });
+  read: async (req, res) => {
+    try {
+      const wilderTable = await dataSource
+        .getRepository(WilderEntity)
+        .query("SELECT * FROM wilder");
+      res.send(wilderTable);
+    } catch {
+      res.send("Error while displaying Wilder's table");
+    }
   },
-  update: (req, res) => {
-    dataSource
-      .getRepository(WilderEntity)
-      .update(req.params.id, req.body)
-      .then(() => {
-        res.send("Updated Wilder");
-      })
-      .catch(() => {
-        res.send("Une erreur est survenue lors de la modification");
-      });
+  // Methode Update
+  update: async (req, res) => {
+    try {
+      const updatedWilder = await dataSource
+        .getRepository(WilderEntity)
+        .update(req.params.id, req.body);
+      res.send("Wilder Updated");
+    } catch {
+      res.send("Error while updating a Wilder");
+    }
   },
-  delete: (req, res) => {
-    dataSource
-      .getRepository(WilderEntity)
-      .delete(req.params.id)
-      .then(() => {
-        res.send("Deleted Wilder");
-      })
-      .catch(() => {
-        res.send("Error while deleting a wilder");
-      });
+  delete: async (req, res) => {
+    try {
+      const deletedWilder = dataSource
+        .getRepository(WilderEntity)
+        .delete(req.params.id);
+      res.send("Wilder Deleted");
+    } catch {
+      res.send("Error while deleting a Wilder");
+    }
   },
 };

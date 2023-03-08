@@ -1,6 +1,7 @@
 const express = require("express"); // Import express
-const dataSource = require("./utils").dataSource;
+const { dataSource } = require("./utils");
 const wilderController = require("./controller/wilder");
+const skillController = require("./controller/skillController");
 
 const app = express(); // Initialize express
 
@@ -10,12 +11,17 @@ app.use(express.json());
 //   res.send("hello world");
 // });
 
-// Routes
+// Wilder's Routes
 
 app.post("/api/wilder", wilderController.create);
 app.get("/api/wilder", wilderController.read);
 app.put("/api/wilder/:id", wilderController.update);
 app.delete("/api/wilder/:id", wilderController.delete);
+
+app.post("/api/skill", skillController.create);
+app.get("/api/skill", skillController.read);
+app.put("/api/skill/:id", skillController.update);
+app.delete("/api/skill/:id", skillController.delete);
 
 // Start server
 
